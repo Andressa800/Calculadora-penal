@@ -1,0 +1,235 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --card-dark: #141418;
+    --gold: #c5a059;
+    --gold-dark: #8b6d31;
+    --text-white: #e1e1e1;
+    --text-muted: #888;
+    --border-color: #2d2d33;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Header Estilo Nobre */
+header {
+    background: linear-gradient(180deg, #121217 0%, var(--bg-dark) 100%);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-dark);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.logo-text {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.top-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    background: #1c1c22;
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+}
+
+/* Layout Principal */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Cards de Crimes */
+.category-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.category-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold-dark);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.crime-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.crime-item:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+/* Checkbox Customizado */
+.check-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.check-container input { position: absolute; opacity: 0; cursor: pointer; }
+
+.checkmark {
+    position: absolute;
+    top: 0; left: 0;
+    height: 20px; width: 20px;
+    background-color: #222;
+    border: 1px solid var(--gold-dark);
+    border-radius: 3px;
+}
+
+.check-container:hover input ~ .checkmark { background-color: #333; }
+.check-container input:checked ~ .checkmark { background-color: var(--gold); }
+
+.info-btn {
+    background: transparent;
+    border: 1px solid var(--gold-dark);
+    color: var(--gold);
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.info-btn:hover { background: var(--gold); color: black; }
+
+/* Sidebar Calculadora Luxo */
+.sidebar-calc {
+    background: #141418;
+    border: 1px solid var(--gold-dark);
+    padding: 25px;
+    border-radius: 8px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.calc-header h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.res-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+
+.res-item span { font-size: 0.75rem; color: var(--text-muted); }
+.res-item strong { color: white; font-size: 1.1rem; }
+.res-item.gold strong { color: var(--gold); }
+
+.selected-crimes-box { margin-top: 20px; }
+.selected-crimes-box label { font-size: 0.7rem; color: var(--gold); }
+
+#lista-crimes {
+    width: 100%;
+    background: #0a0a0c;
+    border: 1px solid #333;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    resize: none;
+}
+
+/* Botões */
+.btn-primary {
+    background: var(--gold);
+    color: #000;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Modal Estilizado */
+.modal-content {
+    background: #1c1c22;
+    color: white;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+}
+.divider { height: 1px; background: var(--gold-dark); margin: 15px 0; }

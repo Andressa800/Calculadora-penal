@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Penal - Dinastia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="topbar">
+            <div class="brand">
+                <div>
+                    <h1>Calculadora Penal</h1>
+                    <p>Selecione todos os artigos e calcule pena, multa e fiança.</p>
+                </div>
+            </div>
+            <div class="header-inputs">
+                <input id="nome_preso" type="text" placeholder="Nome do Preso">
+                <input id="rg_preso" type="text" placeholder="RG do Preso">
+                <input id="rg_advogado" type="text" placeholder="RG do Advogado">
+            </div>
+        </header>
+
+        <main>
+            <section class="crime-list">
+                <div class="toolbar">
+                    <button type="button" class="btn btn-secondary" onclick="openFullLaw()">Ver Código Penal Completo</button>
+                    <p class="hint">Clique em <strong>?</strong> para ver a descrição do artigo.</p>
+                </div>
+
+                <div class="categories">
+                    <div class="category">
+                        <h3>CRIMES CONTRA A VIDA</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="35|5250|37500"
+                                    data-nome="1.1 - Homicídio"
+                                    data-description="Quando uma pessoa toma qualquer ação premeditada para causar intencionalmente a morte de outra pessoa."
+                                    data-group="CRIMES CONTRA A VIDA">
+                                1.1 - Homicídio
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="20|2660|20000"
+                                    data-nome="1.2 - Tentativa de Homicídio"
+                                    data-description="Quando uma pessoa toma alguma ação, deliberada e maliciosamente, com a intenção de causar a morte de outra pessoa e não tem sucesso."
+                                    data-group="CRIMES CONTRA A VIDA">
+                                1.2 - Tentativa de Homicídio
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CRIMES CONTRA DIREITOS FUNDAMENTAIS</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|2100|10000"
+                                    data-nome="2.1 - Lesão corporal"
+                                    data-description="Causar danos significativos a outra pessoa através do toque intencional ofensivo ou prejudicial a essa pessoa sem o seu consentimento. Nota: A Lesão Corporal só se aplica se o indivíduo estiver incapacitado (derrubado)."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.1 - Lesão corporal
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="15|3500|25000"
+                                    data-nome="2.2 - Sequestro"
+                                    data-description="Apreender e levar ilegalmente uma pessoa pela força ou fraude, ou apreender e deter uma pessoa contra a sua vontade com a intenção de levar essa pessoa embora mais tarde. No caso em que vários reféns são tomados de uma só vez, apenas uma cobrança será apresentada."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.2 - Sequestro
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|1750|15000"
+                                    data-nome="2.3 - Cárcere Privado"
+                                    data-description="Deter, ou prender alguém indevidamente e contra sua vontade. No crime de cárcere privado, a vítima quase não tem como se locomover, sua liberdade fica restrita a um pequeno espaço físico, como um quarto ou um banheiro."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.3 - Cárcere Privado
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="40|0|0"
+                                    data-nome="2.5 - Prisão Militar"
+                                    data-description="Quando um oficial da lei deixa de cumprir uma ordem direta ou age fora das condutas e éticas e morais de sua função."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.5 - Prisão Militar
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="40|6300|NA"
+                                    data-nome="2.6 - Prevaricação"
+                                    data-description="É um dos crimes praticados por funcionário público contra a administração em geral que consiste em retardar ou deixar de praticar, indevidamente, ato de ofício, ou praticá-lo contra disposição expressa de lei, para satisfazer interesse ou sentimento pessoal."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.6 - Prevaricação
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3000|8000"
+                                    data-nome="2.7 - Obstrução de justiça"
+                                    data-description="Impede ou dificulta o trabalho das autoridades na investigação, coleta de provas ou prisão de suspeitos."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.7 - Obstrução de justiça
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="20|5600|NA"
+                                    data-nome="2.8 - Tentativa de suborno"
+                                    data-description="Tentar por meio de oferta tirar vantagem sobre defensoria pública."
+                                    data-group="CRIMES CONTRA DIREITOS FUNDAMENTAIS">
+                                2.8 - Tentativa de suborno
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CRIMES CONTRA O PATRIMÔNIO</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|2100|15000"
+                                    data-nome="3.1 - Furto"
+                                    data-description="Subtrair, para si ou para outrem, coisa alheia móvel, mas por circunstâncias não previstas pelo agente, não se consuma o pretendido."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.1 - Furto
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|2100|10000"
+                                    data-nome="3.2 - Receptação de Veículos"
+                                    data-description="Posse de qualquer veículo roubado consigo."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.2 - Receptação de Veículos
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|1050|2250"
+                                    data-nome="3.3 - Tentativa de Furto"
+                                    data-description="Tenta subtrair, para si ou para outrem, coisa alheia móvel, mas por circunstâncias não previstas pelo agente, não se consuma o pretendido."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.3 - Tentativa de Furto
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|2100|10000"
+                                    data-nome="3.4 - Furto de Veículos"
+                                    data-description="Subtrair, para si ou para outrem veículos."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.4 - Furto de Veículos
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="20|5600|20000"
+                                    data-nome="3.5 - Invasão de Imóvel"
+                                    data-description="Entrar em imóvel sem permissão do proprietário."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.5 - Invasão de Imóvel
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="15|2100|7500"
+                                    data-nome="3.6 - Roubo"
+                                    data-description="Subtrair materiais e/ou equipamentos de pessoas alheias."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.6 - Roubo
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="100|14000|35000"
+                                    data-nome="3.7 - Roubo/Furto de Viatura"
+                                    data-description="Subtrair viatura de serviço público para uso pessoal é crime de roubo/furto de viatura, mas se não obtida sob posse do acusado, não deve ser imputado ao réu. A não ser que se possua uma prova concreta coligando o réu a acusação."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.7 - Roubo/Furto de Viatura
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|15000|0"
+                                    data-nome="3.8 - Estabelecimento não licenciado"
+                                    data-description="Possuir comércio e/ou estabelecimento prestador de serviços sem alvará de funcionamento ou com alvará vencido/inválido. (Primeiro dia, aviso | Segundo dia, multa aplicada ao responsável | Terceiro dia, interdição do local)."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.8 - Estabelecimento não licenciado
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="25|10000|18500"
+                                    data-nome="3.9 - Falsificação de documento de alvará"
+                                    data-description="Utilizar documentação não proveniente do tribunal para apresentação à fiscalização com o intuito de ludibriá-la."
+                                    data-group="CRIMES CONTRA O PATRIMÔNIO">
+                                3.9 - Falsificação de documento de alvará
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>DOS ROUBOS E DA EXTORSÃO</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3500|15000"
+                                    data-nome="4.1 - Assalto"
+                                    data-description="Subtrair coisa móvel alheia, para si ou para outrem, mediante grave ameaça ou violência à pessoa, ou depois de havê-la, por qualquer meio, reduzido à impossibilidade de resistência."
+                                    data-group="DOS ROUBOS E DA EXTORSÃO">
+                                4.1 - Assalto
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3500|12500"
+                                    data-nome="4.2 - Furto a Caixa Eletrônico"
+                                    data-description="Furtar um caixa eletrônico / registradora."
+                                    data-group="DOS ROUBOS E DA EXTORSÃO">
+                                4.2 - Furto a Caixa Eletrônico
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3500|25000"
+                                    data-nome="4.3 - Extorsão"
+                                    data-description="Constranger alguém, mediante violência ou grave ameaça, e com o intuito de obter para si ou para outrem indevida vantagem econômica, a fazer, tolerar que se faça ou deixar de fazer alguma coisa."
+                                    data-group="DOS ROUBOS E DA EXTORSÃO">
+                                4.3 - Extorsão
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="30|10500|50000"
+                                    data-nome="5.3 - Trafico de armas"
+                                    data-description="3 ou mais armamentos."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.3 - Trafico de armas
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="15|5250|37500"
+                                    data-nome="5.4 - Porte de arma Pesada"
+                                    data-description="Porte de Thompson, MTAR, AK-47, Parafall, M4A4, MP5, SIG-SAUER, UZI (cada)."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.4 - Porte de arma Pesada
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|2450|20000"
+                                    data-nome="5.5 - Porte de arma Leve"
+                                    data-description="Porte de FIVE-SEVEN, .50, GLOCK (cada)."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.5 - Porte de arma Leve
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|1750|10000"
+                                    data-nome="5.6 - Posse de Munição (-250)"
+                                    data-description="Posse de municiamento inferior a 250 unidades. Munição de HK é legal ter até 50 unidades."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.6 - Posse de Munição (-250)
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|0|4000"
+                                    data-nome="5.7 - Posse de Arma Branca"
+                                    data-description="Posse de qualquer ferramenta de que possa ser utilizada como arma corpo-a-corpo de maneira imprudente e lesiva."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.7 - Posse de Arma Branca
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="30|7000|50000"
+                                    data-nome="5.8 - Tráfico de munição (+250)"
+                                    data-description="Se enquadra como tráfico de munições portar 250 ou mais munições independente do tipo. Munição de HK é legal ter até 50 unidades."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.8 - Tráfico de munição (+250)
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|2450|10000"
+                                    data-nome="5.10 - Posse de materiais ilegais"
+                                    data-description="Estar com posse de mais de um material da mesma espécie em suspeita de cometimento de algum crime como Lockpick, camisa de força, algema, etc."
+                                    data-group="CRIMES DE PORTE, POSSE E EQUIPAMENTOS ILEGAIS">
+                                5.10 - Posse de materiais ilegais
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>NARCOTRÁFICO</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|0|0"
+                                    data-nome="6.3 - Posse de Drogas (1 a 6)"
+                                    data-description="Abaixo de 6, apenas apreender."
+                                    data-group="NARCOTRÁFICO">
+                                6.3 - Posse de Drogas (1 a 6)
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="25|8750|30000"
+                                    data-nome="6.4 - Tráfico de drogas"
+                                    data-description="Posse de 7 ou mais drogas, cumulativamente, considera-se tráfico."
+                                    data-group="NARCOTRÁFICO">
+                                6.4 - Tráfico de drogas
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CRIMES DE FALSIDADE E ORGANIZAÇÃO CRIMINOSA</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="25|5600|25000"
+                                    data-nome="8.1 - Falsidade Ideológica"
+                                    data-description="Se passar por um advogado certificado ou funcionário do governo (incluindo policiais, membros do Departamento de Justiça, etc.)."
+                                    data-group="CRIMES DE FALSIDADE E ORGANIZAÇÃO CRIMINOSA">
+                                8.1 - Falsidade Ideológica
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|2800|6000"
+                                    data-nome="8.3 - Formação de quadrilha"
+                                    data-description="Consiste na associação de quatro ou mais pessoas que se dedicam a cometer um ou mais delitos."
+                                    data-group="CRIMES DE FALSIDADE E ORGANIZAÇÃO CRIMINOSA">
+                                8.3 - Formação de quadrilha
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|1400|3000"
+                                    data-nome="8.4 - Associação Criminosa"
+                                    data-description="Consiste na associação de duas ou mais pessoas que se dedicam a cometer um ou mais delitos."
+                                    data-group="CRIMES DE FALSIDADE E ORGANIZAÇÃO CRIMINOSA">
+                                8.4 - Associação Criminosa
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|0|0"
+                                    data-nome="8.5 - Desordem em tribunal"
+                                    data-description="A prisão deve ser aplicada somente sob ordem direta do Juiz quando está em uma audiência no tribunal."
+                                    data-group="CRIMES DE FALSIDADE E ORGANIZAÇÃO CRIMINOSA">
+                                8.5 - Desordem em tribunal
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CONTRAVENÇÕES E CRIMES MENORES</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|1400|10000"
+                                    data-nome="10.1 - Ameaça"
+                                    data-description="Intencionalmente ou conscientemente colocando outra pessoa com medo de lesões corporais."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.1 - Ameaça
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|1400|3000"
+                                    data-nome="10.3 - Desobediência"
+                                    data-description="Nenhuma pessoa poderá deixar de cumprir qualquer ordem legal ou direção de qualquer policial. (Em caso de tentativa de fuga, não deve ser aplicado, causa duplicidade)."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.3 - Desobediência
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3500|0"
+                                    data-nome="10.8 - Vandalismo"
+                                    data-description="Destruir, inutilizar ou deteriorar coisa alheia."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.8 - Vandalismo
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="15|0|0"
+                                    data-nome="10.8.1 - Dano ao patrimônio público"
+                                    data-description="Causar danos à propriedade do Governo."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.8.1 - Dano ao patrimônio público
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|10500|35000"
+                                    data-nome="10.9 - Abuso de Autoridade"
+                                    data-description="Quando o Agente usa das suas atribuições do cargo para constranger, ameaçar, agredir ou qualquer outro ato que atinja um cidadão. Deve ser analisado pela hierarquia superior da polícia e/ou juiz."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.9 - Abuso de Autoridade
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|5600|15000"
+                                    data-nome="10.10 - Uso de máscara"
+                                    data-description="Usar máscara ou qualquer outra coisa que impeça o Agente de identificar um cidadão. (Só pode ser aplicado quando não está se cometendo algum crime). Primeira vez advertência verbal, posteriormente aplicação."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.10 - Uso de máscara
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|5600|20000"
+                                    data-nome="10.11 - Uso de equipamentos restritos"
+                                    data-description="Uso de equipamentos balísticos: coldres, coletes/capacetes militares etc."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.11 - Uso de equipamentos restritos
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|3500|50000"
+                                    data-nome="10.19 - Omissão de socorro"
+                                    data-description="Deixar de prestar assistência, quando possível fazê-lo sem risco pessoal, a criança abandonada ou extraviada, ou à pessoa inválida ou ferida, ao desamparo ou em grave e iminente perigo; ou não pedir, nesses casos, o socorro da autoridade pública."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.19 - Omissão de socorro
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|5600|25000"
+                                    data-nome="10.20 - Bloqueio de via pública"
+                                    data-description="Usar qualquer veículo e/ou materiais para, deliberadamente, interromper, restringir ou perturbar a circulação na via sem autorização."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.20 - Bloqueio de via pública
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="30|5600|12000"
+                                    data-nome="10.21 - Desordem em local público"
+                                    data-description="Provocar ou infundir pânico generalizado em locais públicos, se enquadram na lei: DEPARTAMENTO POLICIAL, PREFEITURA e TRIBUNAL."
+                                    data-group="CONTRAVENÇÕES E CRIMES MENORES">
+                                10.21 - Desordem em local público
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>TRÂNSITO E VEÍCULOS</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="10|1400|10000"
+                                    data-nome="11.1 - Tentativa de Fuga"
+                                    data-description="Desobedecer a ordem de parada de um oficial ou se evadir de uma guarnição de qualquer forma."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.1 - Tentativa de Fuga
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="20|2100|NA"
+                                    data-nome="11.4 - Corridas ilegais"
+                                    data-description="Participar e/ou organizar de corridas ilegais. Condução imprudente sobre vias públicas e zonas rurais."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.4 - Corridas ilegais
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|1400|0"
+                                    data-nome="11.6 - Estacionar em Local Proibido"
+                                    data-description="Deixar o veículo em local indevido."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.6 - Estacionar em Local Proibido
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|7000|0"
+                                    data-nome="11.7 - Pousar em Local Proibido"
+                                    data-description="Pousar veículos aéreos fora de locais adequados e seguros."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.7 - Pousar em Local Proibido
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|35000|0"
+                                    data-nome="11.8 - Manobra imprudente com aeronave"
+                                    data-description="Utilizar aeronave de forma imprudente."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.8 - Manobra imprudente com aeronave
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|1050|0"
+                                    data-nome="11.9 - Veículo Abandonado"
+                                    data-description="Abandonar veículo em local indevido."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.9 - Veículo Abandonado
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|1400|0"
+                                    data-nome="11.11 - Dano ao Patrimônio"
+                                    data-description="Utilizar um veículo para causar dano ao patrimônio alheio."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.11 - Dano ao Patrimônio
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|1400|0"
+                                    data-nome="11.12 - Veículo Danificado"
+                                    data-description="Trafegar utilizando veículo danificado."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.12 - Veículo Danificado
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|2100|0"
+                                    data-nome="11.13 - Bloquear ou Danificar Viatura"
+                                    data-description="Impedir ou bloquear a passagem de uma viatura (colidindo ou bloqueando)."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.13 - Bloquear ou Danificar Viatura
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="0|1400|0"
+                                    data-nome="11.15 - Conduzir sem habilitação"
+                                    data-description="Ao conduzir sem habilitação, o veículo será apreendido."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.15 - Conduzir sem habilitação
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|3500|20000"
+                                    data-nome="11.16 - Homicídio Culposo no Trânsito"
+                                    data-description="O crime de homicídio no trânsito ocorre sempre que uma pessoa mata (ou desmaia) outra pessoa em um acidente de trânsito, sem intenção de matar."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.16 - Homicídio Culposo no Trânsito
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|3500|12000"
+                                    data-nome="11.17 - Tentativa de homicídio no trânsito"
+                                    data-description="Tentativa de causar homicídio no trânsito sem consumar o resultado fatal."
+                                    data-group="TRÂNSITO E VEÍCULOS">
+                                11.17 - Tentativa de homicídio no trânsito
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <h3>CRIMES CONTRA A ADMINISTRAÇÃO PÚBLICA</h3>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|1400|NA"
+                                    data-nome="14.1 - Desacato a autoridade"
+                                    data-description="Desacato, desobediência ou desrespeito perante um funcionário público na forma de comportamento que se opõe ou desafia a autoridade."
+                                    data-group="CRIMES CONTRA A ADMINISTRAÇÃO PÚBLICA">
+                                14.1 - Desacato a autoridade
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                        <div class="crime-item">
+                            <label>
+                                <input type="checkbox" class="crime-check" value="5|0|NA"
+                                    data-nome="14.2 - Resistência a Prisão"
+                                    data-description="O ato de usar a força para impedir a prisão (com ou sem mandado), algemar e/ou levar uma pessoa para a custódia policial, correr conta como resistir. (+ 50 MIL DE MULTA)."
+                                    data-group="CRIMES CONTRA A ADMINISTRAÇÃO PÚBLICA">
+                                14.2 - Resistência a Prisão
+                            </label>
+                            <button type="button" class="help-icon" onclick="showHelp(this)">?</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="calculator-sidebar">
+                <h2>CALCULADORA</h2>
+                <div class="resumo">
+                    <p><strong>⚖️ Pena total:</strong> <span id="display-pena">0</span> meses</p>
+                    <p><strong>💸 Multa total:</strong> <span id="display-multa">R$ 0</span></p>
+                    <p><strong>💰 Fiança:</strong> <span id="display-fianca">R$ 0</span></p>
+                </div>
+
+                <div class="selected-box">
+                    <label for="selected-crimes">Crimes selecionados</label>
+                    <textarea id="selected-crimes" readonly rows="8">Nenhum crime selecionado</textarea>
+                </div>
+
+                <div class="atenuantes">
+                    <label><input id="adv-constituido" type="checkbox"> Advogado Constituído (-30% na fiança)</label>
+                </div>
+
+                <button id="send-btn" class="btn btn-primary">Enviar para Discord</button>
+                <button id="clear-btn" class="btn btn-clear">Limpar</button>
+            </aside>
+        </main>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <header>
+                <h2 id="modalTitle">Detalhes do Artigo</h2>
+                <button type="button" class="close" onclick="closeModal()">×</button>
+            </header>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
